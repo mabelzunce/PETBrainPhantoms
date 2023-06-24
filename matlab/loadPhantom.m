@@ -5,14 +5,25 @@ close all
 clear
 %% LAOD THE PHANTOM
 load('../data/phantom_atlas_density_cls.mat')
+%% OPTIONAL: ADD CLS IMAGE
+% Previous version of the phantom did not have the cls image in the.mat
+% Download the cls image from bigbrain and uncomment this code to create an
+% updated .mat file.
+% cls = niftiread('../data/full_cls_400um_2009b_sym.nii.gz');
+% cls = permute(cls, [2 1 3]);
+% cls = cls(:,:,end:-1:1);
+% cls = cls(end:-1:1,:,:);
+% phantom_atlas_density_cls.cls = cls;
+% save('../data/phantom_atlas_density_cls.mat', "phantom_atlas_density_cls");
 %% GET EACH INDIVIDUAL IMAGE
 fdgPhantom = phantom_atlas_density_cls.phantom;
 fdgPhantomSmoothed = phantom_atlas_density_cls.phantom_smoothed;
 fdgPhantomGuidedFilter = phantom_atlas_density_cls.phantom_guided_filter;
 mriPhantom = phantom_atlas_density_cls.mr;
-muMapPhantom = phantom_atlas_density_cls.ct;
-ctPhantom = phantom_atlas_density_cls.umap;
+ctPhantom = phantom_atlas_density_cls.ct;
+muMapPhantom = phantom_atlas_density_cls.umap;
 voxelSize_mm = 0.4;
+
 %% SHOW IMAGES
 slice = 280;
 figure;
